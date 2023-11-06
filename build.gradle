@@ -1,12 +1,12 @@
 plugins {
-	id 'fabric-loom' version '0.11-SNAPSHOT'
+	id 'fabric-loom' version '1.2-SNAPSHOT'
 	id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+base {
+	archivesName = project.archives_base_name
+}
 
-archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
 
@@ -14,15 +14,11 @@ repositories {
 	maven { url 'https://jitpack.io' }
 	maven {
 		name = "Ladysnake Mods"
-		url = 'https://ladysnake.jfrog.io/artifactory/mods'
+		url = 'https://maven.ladysnake.org/releases'
 	}
 	maven {
 		name = "Terraformers"
 		url = "https://maven.terraformersmc.com/"
-	}
-	maven {
-		name = "Fuzs Mod Resources"
-		url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
 	}
 	exclusiveContent {
 		forRepository {
@@ -37,6 +33,18 @@ repositories {
 	}
 }
 
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		"betterenchantmentboosting" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+
+}
+
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -47,23 +55,21 @@ dependencies {
 	// modRuntimeOnly 'com.github.paulevsGitch:BCLib:1.2.5'
 
 	// All this to verify that a single mixin to easy magic would work
-	modCompileOnly "maven.modrinth:easy-magic:v4.3.3-1.19.2-Fabric"
-	modCompileOnly "net.minecraftforge:forgeconfigapiport-fabric:4.2.11"
-	modCompileOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-base:4.1.0"
-	modCompileOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:4.1.0"
-	modCompileOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-block:4.1.0"
-	modCompileOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-chunk:4.1.0"
-	modCompileOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-world:4.1.0"
+	modCompileOnly "maven.modrinth:easy-magic:v8.0.1-1.20.1-Fabric"
+	modCompileOnly "maven.modrinth:puzzles-lib:v8.0.23-1.20.1-Fabric"
+	modCompileOnly "maven.modrinth:forge-config-api-port:v8.0.0-1.20.1-Fabric"
 
-	modRuntimeOnly "maven.modrinth:easy-magic:v4.3.3-1.19.2-Fabric"
-	modRuntimeOnly "maven.modrinth:puzzles-lib:v4.4.0-1.19.2-Fabric"
-	modRuntimeOnly "net.minecraftforge:forgeconfigapiport-fabric:4.2.11"
-	modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-base:4.1.0"
-	modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:4.1.0"
-	modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-block:4.1.0"
-	modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-chunk:4.1.0"
-	modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-world:4.1.0"
-	modRuntimeOnly "com.terraformersmc:modmenu:4.1.2"
+	modRuntimeOnly "maven.modrinth:easy-magic:v8.0.1-1.20.1-Fabric"
+	modRuntimeOnly "maven.modrinth:puzzles-lib:v8.0.23-1.20.1-Fabric"
+	modRuntimeOnly "maven.modrinth:forge-config-api-port:v8.0.0-1.20.1-Fabric"
+	modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-base:5.2.1"
+	modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-entity:5.2.1"
+	modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-block:5.2.1"
+	modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-chunk:5.2.1"
+	modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-world:5.2.1"
+	modRuntimeOnly "com.terraformersmc:modmenu:7.0.1"
+	modRuntimeOnly "com.terraformersmc.terraform-api:terraform-wood-api-v1:7.0.1"
+	modRuntimeOnly "maven.modrinth:aurorasdecorations:1.0.0-beta.21+1.20.1"
 }
 
 processResources {
@@ -84,6 +90,9 @@ java {
 	// if it is present.
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 }
 
 jar {
