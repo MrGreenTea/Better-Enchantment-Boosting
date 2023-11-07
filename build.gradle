@@ -20,6 +20,12 @@ repositories {
 		name = "Terraformers"
 		url = "https://maven.terraformersmc.com/"
 	}
+	maven {
+		url "https://cursemaven.com"
+		content {
+			includeGroup "curse.maven"
+		}
+	}
 	exclusiveContent {
 		forRepository {
 			maven {
@@ -58,6 +64,10 @@ dependencies {
 	modCompileOnly "maven.modrinth:easy-magic:v8.0.1-1.20.1-Fabric"
 	modCompileOnly "maven.modrinth:puzzles-lib:v8.0.23-1.20.1-Fabric"
 	modCompileOnly "maven.modrinth:forge-config-api-port:v8.0.0-1.20.1-Fabric"
+
+	// For showing the correct enchantment power
+	modCompileOnly "curse.maven:jade-324717:4768565"
+	modRuntimeOnly "curse.maven:jade-324717:4768565"
 
 	modRuntimeOnly "maven.modrinth:easy-magic:v8.0.1-1.20.1-Fabric"
 	modRuntimeOnly "maven.modrinth:puzzles-lib:v8.0.23-1.20.1-Fabric"

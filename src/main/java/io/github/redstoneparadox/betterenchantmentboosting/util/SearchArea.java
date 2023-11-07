@@ -37,7 +37,8 @@ public final class SearchArea {
 				for (int y = minY; y <= maxY; y++) {
 					for (int z = minZ; z <= maxZ; z++) {
 						// Only evaluate cells that are currently growing
-						if (cells.get(x, y, z) != CellState.GROWING) continue;
+						CellState cellState = cells.get(x, y, z);
+						if (cellState != CellState.GROWING) continue;
 
 						for (Direction direction: Direction.values()) {
 							int nxtX = direction.getOffsetX() + x;

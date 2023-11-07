@@ -1,6 +1,7 @@
 package io.github.redstoneparadox.betterenchantmentboosting.util;
 
 import io.github.redstoneparadox.betterenchantmentboosting.BetterEnchantmentBoosting;
+import io.github.redstoneparadox.betterenchantmentboosting.config.BoundsConfig;
 import net.minecraft.block.Block;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
@@ -13,9 +14,10 @@ import java.util.List;
 
 public class SearchUtil {
 	public static List<BlockPos> search(World world, BlockPos origin) {
-		int distance = BetterEnchantmentBoosting.CONFIG.bounds().distance();
-		int height = BetterEnchantmentBoosting.CONFIG.bounds().height();
-		int depth = BetterEnchantmentBoosting.CONFIG.bounds().depth();
+		BoundsConfig boundsConfig = BetterEnchantmentBoosting.CONFIG.bounds();
+		int distance = boundsConfig.distance();
+		int height = boundsConfig.height();
+		int depth = boundsConfig.depth();
 		Box bounds = new Box(origin.add(-distance, depth, -distance), origin.add(distance, height, distance));
 		SearchArea area = new SearchArea();
 
